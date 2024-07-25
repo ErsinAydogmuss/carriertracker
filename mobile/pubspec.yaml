@@ -1,0 +1,48 @@
+name: yetis_mobile
+description: "A new Flutter project."
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.3 <4.0.0'
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  image_picker: ^1.0.7
+  permission_handler: ^11.2.1
+  jwt_decode: ^0.3.1
+  http: ^1.2.0
+  google_fonts: 6.1.0
+  flutter_launcher_icons: ^0.13.1
+  get_storage: ^2.1.1
+  flutter_html: ^3.0.0-beta.2
+  socket_io_client: ^2.0.3+1
+  appwrite: ^12.0.3
+  provider: ^6.1.2
+  cupertino_icons: ^1.0.6
+  flutter_map: ^7.0.2
+  latlong2: ^0.9.1
+  geolocator: ^12.0.0
+  geolocator_apple: ^2.3.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^3.0.0
+  flutter_markdown: ^0.7.1
+
+flutter_icons:
+  android: true
+  ios: true
+  adaptive_icon_background: "#0000FF"
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true

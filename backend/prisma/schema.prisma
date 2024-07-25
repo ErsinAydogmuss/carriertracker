@@ -1,0 +1,82 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String @unique
+  password String
+
+  role   Role
+  orders Order[]
+
+  carrier Carrier?
+  admin   Admin?
+}
+
+model Carrier {
+  id      Int     @id @default(autoincrement())
+  isReady Boolean @default(false)
+
+  orders Order[]
+
+  locationId Int
+  location   Location @relation(fields: [locationId], references: [id])
+
+  userId Int  @unique
+  user   User @relation(fields: [userId], references: [id])
+}
+
+model Admin {
+  id Int @id @default(autoincrement())
+
+  orders Order[]
+
+  userId Int  @unique
+  user   User @relation(fields: [userId], references: [id])
+}
+
+model Order {
+  id     Int         @id @default(autoincrement())
+  status OrderStatus @default(PENDING)
+
+  product String
+
+  adminId    Int?
+  assignedBy Admin? @relation(fields: [adminId], references: [id])
+
+  carrierId  Int?
+  assignedTo Carrier? @relation(fields: [carrierId], references: [id])
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  locationId Int
+  moveTo     Location @relation(fields: [locationId], references: [id])
+}
+
+model Location {
+  id        Int       @id @default(autoincrement())
+  latitude  Float
+  longitude Float
+  Order     Order[]
+  Carrier   Carrier[]
+}
+
+enum Role {
+  USER
+  CARRIER
+  ADMIN
+}
+
+enum OrderStatus {
+  PENDING
+  ASSIGNED
+  COMPLETED
+}
